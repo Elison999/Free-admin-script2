@@ -1,0 +1,897 @@
+-- Xith Hub | Free Admin - PARTE 1
+-- Script para Roblox Mobile
+
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local LocalPlayer = Players.LocalPlayer
+
+-- Criar ScreenGui Principal
+local Xith_Hub = Instance.new("ScreenGui")
+Xith_Hub.Name = "XithHub"
+Xith_Hub.ResetOnSpawn = false
+Xith_Hub.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+-- Frame Principal
+local MainFrame = Instance.new("Frame")
+MainFrame.Name = "MainFrame"
+MainFrame.Size = UDim2.new(0, 280, 0, 350)
+MainFrame.Position = UDim2.new(0.5, -140, 0.5, -175)
+MainFrame.BackgroundColor3 = Color3.fromRGB(25, 25, 35)
+MainFrame.BorderSizePixel = 0
+MainFrame.Parent = Xith_Hub
+
+local MainCorner = Instance.new("UICorner")
+MainCorner.CornerRadius = UDim.new(0, 8)
+MainCorner.Parent = MainFrame
+
+-- TopBar
+local TopBar = Instance.new("Frame")
+TopBar.Name = "TopBar"
+TopBar.Size = UDim2.new(1, 0, 0, 35)
+TopBar.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+TopBar.BorderSizePixel = 0
+TopBar.Parent = MainFrame
+
+local TopCorner = Instance.new("UICorner")
+TopCorner.CornerRadius = UDim.new(0, 8)
+TopCorner.Parent = TopBar
+
+local TopFix = Instance.new("Frame")
+TopFix.Size = UDim2.new(1, 0, 0, 8)
+TopFix.Position = UDim2.new(0, 0, 1, -8)
+TopFix.BackgroundColor3 = Color3.fromRGB(35, 35, 50)
+TopFix.BorderSizePixel = 0
+TopFix.Parent = TopBar
+
+-- Title
+local Title = Instance.new("TextLabel")
+Title.Name = "Title"
+Title.Size = UDim2.new(1, -70, 1, 0)
+Title.Position = UDim2.new(0, 10, 0, 0)
+Title.BackgroundTransparency = 1
+Title.Text = "Xith Hub | Free Admin"
+Title.TextColor3 = Color3.fromRGB(255, 255, 255)
+Title.TextSize = 14
+Title.Font = Enum.Font.GothamBold
+Title.TextXAlignment = Enum.TextXAlignment.Left
+Title.Parent = TopBar
+
+-- Close Button
+local CloseButton = Instance.new("TextButton")
+CloseButton.Name = "CloseButton"
+CloseButton.Size = UDim2.new(0, 30, 0, 30)
+CloseButton.Position = UDim2.new(1, -35, 0, 2.5)
+CloseButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+CloseButton.Text = "X"
+CloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CloseButton.TextSize = 16
+CloseButton.Font = Enum.Font.GothamBold
+CloseButton.Parent = TopBar
+
+local CloseCorner = Instance.new("UICorner")
+CloseCorner.CornerRadius = UDim.new(0, 6)
+CloseCorner.Parent = CloseButton
+
+-- Tabs ScrollFrame
+local TabsScrollFrame = Instance.new("ScrollingFrame")
+TabsScrollFrame.Name = "TabsScrollFrame"
+TabsScrollFrame.Size = UDim2.new(1, -10, 0, 40)
+TabsScrollFrame.Position = UDim2.new(0, 5, 0, 40)
+TabsScrollFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+TabsScrollFrame.BorderSizePixel = 0
+TabsScrollFrame.ScrollBarThickness = 4
+TabsScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+TabsScrollFrame.AutomaticCanvasSize = Enum.AutomaticSize.X
+TabsScrollFrame.ScrollingDirection = Enum.ScrollingDirection.X
+TabsScrollFrame.Parent = MainFrame
+
+local TabsCorner = Instance.new("UICorner")
+TabsCorner.CornerRadius = UDim.new(0, 6)
+TabsCorner.Parent = TabsScrollFrame
+
+-- Tabs Container
+local TabsContainer = Instance.new("Frame")
+TabsContainer.Name = "TabsContainer"
+TabsContainer.Size = UDim2.new(0, 0, 1, 0)
+TabsContainer.BackgroundTransparency = 1
+TabsContainer.Parent = TabsScrollFrame
+
+local TabsLayout = Instance.new("UIListLayout")
+TabsLayout.FillDirection = Enum.FillDirection.Horizontal
+TabsLayout.Padding = UDim.new(0, 8)
+TabsLayout.Parent = TabsContainer
+
+local TabsPadding = Instance.new("UIPadding")
+TabsPadding.PaddingLeft = UDim.new(0, 5)
+TabsPadding.PaddingRight = UDim.new(0, 5)
+TabsPadding.PaddingTop = UDim.new(0, 5)
+TabsPadding.PaddingBottom = UDim.new(0, 5)
+TabsPadding.Parent = TabsContainer
+
+-- Commands Tab Button
+local CommandsTab = Instance.new("TextButton")
+CommandsTab.Name = "CommandsTab"
+CommandsTab.Size = UDim2.new(0, 90, 1, -10)
+CommandsTab.BackgroundColor3 = Color3.fromRGB(50, 150, 255)
+CommandsTab.Text = "Commands"
+CommandsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+CommandsTab.TextSize = 13
+CommandsTab.Font = Enum.Font.GothamBold
+CommandsTab.Parent = TabsContainer
+
+local CmdTabCorner = Instance.new("UICorner")
+CmdTabCorner.CornerRadius = UDim.new(0, 6)
+CmdTabCorner.Parent = CommandsTab
+
+-- Anti Commands Tab Button
+local AntiCommandsTab = Instance.new("TextButton")
+AntiCommandsTab.Name = "AntiCommandsTab"
+AntiCommandsTab.Size = UDim2.new(0, 110, 1, -10)
+AntiCommandsTab.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
+AntiCommandsTab.Text = "Anti Commands"
+AntiCommandsTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+AntiCommandsTab.TextSize = 13
+AntiCommandsTab.Font = Enum.Font.GothamBold
+AntiCommandsTab.Parent = TabsContainer
+
+local AntiTabCorner = Instance.new("UICorner")
+AntiTabCorner.CornerRadius = UDim.new(0, 6)
+AntiTabCorner.Parent = AntiCommandsTab
+
+-- Content Frame
+local ContentFrame = Instance.new("Frame")
+ContentFrame.Name = "ContentFrame"
+ContentFrame.Size = UDim2.new(1, -10, 1, -90)
+ContentFrame.Position = UDim2.new(0, 5, 0, 85)
+ContentFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+ContentFrame.BorderSizePixel = 0
+ContentFrame.Parent = MainFrame
+
+local ContentCorner = Instance.new("UICorner")
+ContentCorner.CornerRadius = UDim.new(0, 6)
+ContentCorner.Parent = ContentFrame
+
+-- Commands Content
+local CommandsContent = Instance.new("ScrollingFrame")
+CommandsContent.Name = "CommandsContent"
+CommandsContent.Size = UDim2.new(1, 0, 1, 0)
+CommandsContent.BackgroundTransparency = 1
+CommandsContent.BorderSizePixel = 0
+CommandsContent.ScrollBarThickness = 4
+CommandsContent.CanvasSize = UDim2.new(0, 0, 0, 0)
+CommandsContent.AutomaticCanvasSize = Enum.AutomaticSize.Y
+CommandsContent.Visible = true
+CommandsContent.Parent = ContentFrame
+
+local CmdLayout = Instance.new("UIListLayout")
+CmdLayout.Padding = UDim.new(0, 8)
+CmdLayout.Parent = CommandsContent
+
+local CmdPadding = Instance.new("UIPadding")
+CmdPadding.PaddingLeft = UDim.new(0, 8)
+CmdPadding.PaddingRight = UDim.new(0, 8)
+CmdPadding.PaddingTop = UDim.new(0, 8)
+CmdPadding.PaddingBottom = UDim.new(0, 8)
+CmdPadding.Parent = CommandsContent
+
+-- Select Player Button
+local SelectPlayerButton = Instance.new("TextButton")
+SelectPlayerButton.Name = "SelectPlayerButton"
+SelectPlayerButton.Size = UDim2.new(1, 0, 0, 35)
+SelectPlayerButton.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+SelectPlayerButton.Text = "Select Player"
+SelectPlayerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+SelectPlayerButton.TextSize = 13
+SelectPlayerButton.Font = Enum.Font.GothamBold
+SelectPlayerButton.Parent = CommandsContent
+
+local SelPlayerCorner = Instance.new("UICorner")
+SelPlayerCorner.CornerRadius = UDim.new(0, 6)
+SelPlayerCorner.Parent = SelectPlayerButton
+
+-- One Player Toggle
+local OnePlayerToggle = Instance.new("Frame")
+OnePlayerToggle.Name = "OnePlayerToggle"
+OnePlayerToggle.Size = UDim2.new(1, 0, 0, 35)
+OnePlayerToggle.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+OnePlayerToggle.Parent = CommandsContent
+
+local OnePlayerCorner = Instance.new("UICorner")
+OnePlayerCorner.CornerRadius = UDim.new(0, 6)
+OnePlayerCorner.Parent = OnePlayerToggle
+
+local OnePlayerLabel = Instance.new("TextLabel")
+OnePlayerLabel.Size = UDim2.new(1, -50, 1, 0)
+OnePlayerLabel.Position = UDim2.new(0, 10, 0, 0)
+OnePlayerLabel.BackgroundTransparency = 1
+OnePlayerLabel.Text = "One Player"
+OnePlayerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+OnePlayerLabel.TextSize = 13
+OnePlayerLabel.Font = Enum.Font.Gotham
+OnePlayerLabel.TextXAlignment = Enum.TextXAlignment.Left
+OnePlayerLabel.Parent = OnePlayerToggle
+
+local OnePlayerSwitch = Instance.new("TextButton")
+OnePlayerSwitch.Name = "Switch"
+OnePlayerSwitch.Size = UDim2.new(0, 40, 0, 20)
+OnePlayerSwitch.Position = UDim2.new(1, -45, 0.5, -10)
+OnePlayerSwitch.BackgroundColor3 = Color3.fromRGB(60, 60, 75)
+OnePlayerSwitch.Text = ""
+OnePlayerSwitch.Parent = OnePlayerToggle
+
+local SwitchCorner1 = Instance.new("UICorner")
+SwitchCorner1.CornerRadius = UDim.new(1, 0)
+SwitchCorner1.Parent = OnePlayerSwitch
+
+local SwitchBall1 = Instance.new("Frame")
+SwitchBall1.Name = "Ball"
+SwitchBall1.Size = UDim2.new(0, 16, 0, 16)
+SwitchBall1.Position = UDim2.new(0, 2, 0.5, -8)
+SwitchBall1.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+SwitchBall1.BorderSizePixel = 0
+SwitchBall1.Parent = OnePlayerSwitch
+
+local BallCorner1 = Instance.new("UICorner")
+BallCorner1.CornerRadius = UDim.new(1, 0)
+BallCorner1.Parent = SwitchBall1
+
+-- All Players Toggle
+local AllPlayersToggle = Instance.new("Frame")
+AllPlayersToggle.Name = "AllPlayersToggle"
+AllPlayersToggle.Size = UDim2.new(1, 0, 0, 35)
+AllPlayersToggle.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+AllPlayersToggle.Parent = CommandsContent
+
+local AllPlayersCorner = Instance.new("UICorner")
+AllPlayersCorner.CornerRadius = UDim.new(0, 6)
+AllPlayersCorner.Parent = AllPlayersToggle
+
+local AllPlayersLabel = Instance.new("TextLabel")
+AllPlayersLabel.Size = UDim2.new(1, -50, 1, 0)
+AllPlayersLabel.Position = UDim2.new(0, 10, 0, 0)
+AllPlayersLabel.BackgroundTransparency = 1
+AllPlayersLabel.Text = "All Players"
+AllPlayersLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+AllPlayersLabel.TextSize = 13
+AllPlayersLabel.Font = Enum.Font.Gotham
+AllPlayersLabel.TextXAlignment = Enum.TextXAlignment.Left
+AllPlayersLabel.Parent = AllPlayersToggle
+
+local AllPlayersSwitch = Instance.new("TextButton")
+AllPlayersSwitch.Name = "Switch"
+AllPlayersSwitch.Size = UDim2.new(0, 40, 0, 20)
+AllPlayersSwitch.Position = UDim2.new(1, -45, 0.5, -10)
+AllPlayersSwitch.BackgroundColor3 = Color3.fromRGB(60, 60, 75)
+AllPlayersSwitch.Text = ""
+AllPlayersSwitch.Parent = AllPlayersToggle
+
+local SwitchCorner2 = Instance.new("UICorner")
+SwitchCorner2.CornerRadius = UDim.new(1, 0)
+SwitchCorner2.Parent = AllPlayersSwitch
+
+local SwitchBall2 = Instance.new("Frame")
+SwitchBall2.Name = "Ball"
+SwitchBall2.Size = UDim2.new(0, 16, 0, 16)
+SwitchBall2.Position = UDim2.new(0, 2, 0.5, -8)
+SwitchBall2.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+SwitchBall2.BorderSizePixel = 0
+SwitchBall2.Parent = AllPlayersSwitch
+
+local BallCorner2 = Instance.new("UICorner")
+BallCorner2.CornerRadius = UDim.new(1, 0)
+BallCorner2.Parent = SwitchBall2
+
+-- Select Command Button
+local SelectCommandButton = Instance.new("TextButton")
+SelectCommandButton.Name = "SelectCommandButton"
+SelectCommandButton.Size = UDim2.new(1, 0, 0, 35)
+SelectCommandButton.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+SelectCommandButton.Text = "Select Command"
+SelectCommandButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+SelectCommandButton.TextSize = 13
+SelectCommandButton.Font = Enum.Font.GothamBold
+SelectCommandButton.Parent = CommandsContent
+
+local SelCmdCorner = Instance.new("UICorner")
+SelCmdCorner.CornerRadius = UDim.new(0, 6)
+SelCmdCorner.Parent = SelectCommandButton
+
+-- Execute Command Button
+local ExecuteButton = Instance.new("TextButton")
+ExecuteButton.Name = "ExecuteButton"
+ExecuteButton.Size = UDim2.new(1, 0, 0, 40)
+ExecuteButton.BackgroundColor3 = Color3.fromRGB(50, 200, 100)
+ExecuteButton.Text = "Execute Command"
+ExecuteButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExecuteButton.TextSize = 14
+ExecuteButton.Font = Enum.Font.GothamBold
+ExecuteButton.Parent = CommandsContent
+
+local ExecCorner = Instance.new("UICorner")
+ExecCorner.CornerRadius = UDim.new(0, 6)
+ExecCorner.Parent = ExecuteButton
+
+-- Anti Commands Content
+local AntiCommandsContent = Instance.new("ScrollingFrame")
+AntiCommandsContent.Name = "AntiCommandsContent"
+AntiCommandsContent.Size = UDim2.new(1, 0, 1, 0)
+AntiCommandsContent.BackgroundTransparency = 1
+AntiCommandsContent.BorderSizePixel = 0
+AntiCommandsContent.ScrollBarThickness = 4
+AntiCommandsContent.CanvasSize = UDim2.new(0, 0, 0, 0)
+AntiCommandsContent.AutomaticCanvasSize = Enum.AutomaticSize.Y
+AntiCommandsContent.Visible = false
+AntiCommandsContent.Parent = ContentFrame
+
+local AntiLayout = Instance.new("UIListLayout")
+AntiLayout.Padding = UDim.new(0, 8)
+AntiLayout.Parent = AntiCommandsContent
+
+local AntiPadding = Instance.new("UIPadding")
+AntiPadding.PaddingLeft = UDim.new(0, 8)
+AntiPadding.PaddingRight = UDim.new(0, 8)
+AntiPadding.PaddingTop = UDim.new(0, 8)
+AntiPadding.PaddingBottom = UDim.new(0, 8)
+AntiPadding.Parent = AntiCommandsContent
+
+-- Anti Cmdbar2 Toggle
+local AntiCmdbar2Toggle = Instance.new("Frame")
+AntiCmdbar2Toggle.Name = "AntiCmdbar2Toggle"
+AntiCmdbar2Toggle.Size = UDim2.new(1, 0, 0, 35)
+AntiCmdbar2Toggle.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+AntiCmdbar2Toggle.Parent = AntiCommandsContent
+
+local AntiCmdbar2Corner = Instance.new("UICorner")
+AntiCmdbar2Corner.CornerRadius = UDim.new(0, 6)
+AntiCmdbar2Corner.Parent = AntiCmdbar2Toggle
+
+local AntiCmdbar2Label = Instance.new("TextLabel")
+AntiCmdbar2Label.Size = UDim2.new(1, -50, 1, 0)
+AntiCmdbar2Label.Position = UDim2.new(0, 10, 0, 0)
+AntiCmdbar2Label.BackgroundTransparency = 1
+AntiCmdbar2Label.Text = "Anti Cmdbar2"
+AntiCmdbar2Label.TextColor3 = Color3.fromRGB(255, 255, 255)
+AntiCmdbar2Label.TextSize = 13
+AntiCmdbar2Label.Font = Enum.Font.Gotham
+AntiCmdbar2Label.TextXAlignment = Enum.TextXAlignment.Left
+AntiCmdbar2Label.Parent = AntiCmdbar2Toggle
+
+local AntiCmdbar2Switch = Instance.new("TextButton")
+AntiCmdbar2Switch.Name = "Switch"
+AntiCmdbar2Switch.Size = UDim2.new(0, 40, 0, 20)
+AntiCmdbar2Switch.Position = UDim2.new(1, -45, 0.5, -10)
+AntiCmdbar2Switch.BackgroundColor3 = Color3.fromRGB(60, 60, 75)
+AntiCmdbar2Switch.Text = ""
+AntiCmdbar2Switch.Parent = AntiCmdbar2Toggle
+
+local SwitchCorner3 = Instance.new("UICorner")
+SwitchCorner3.CornerRadius = UDim.new(1, 0)
+SwitchCorner3.Parent = AntiCmdbar2Switch
+
+local SwitchBall3 = Instance.new("Frame")
+SwitchBall3.Name = "Ball"
+SwitchBall3.Size = UDim2.new(0, 16, 0, 16)
+SwitchBall3.Position = UDim2.new(0, 2, 0.5, -8)
+SwitchBall3.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+SwitchBall3.BorderSizePixel = 0
+SwitchBall3.Parent = AntiCmdbar2Switch
+
+local BallCorner3 = Instance.new("UICorner")
+BallCorner3.CornerRadius = UDim.new(1, 0)
+BallCorner3.Parent = SwitchBall3
+
+-- Coming Soon Description
+local ComingSoonLabel = Instance.new("TextLabel")
+ComingSoonLabel.Size = UDim2.new(1, 0, 0, 60)
+ComingSoonLabel.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+ComingSoonLabel.Text = "Coming Soon\n\nMore anti-command features will be added in future updates!"
+ComingSoonLabel.TextColor3 = Color3.fromRGB(180, 180, 180)
+ComingSoonLabel.TextSize = 12
+ComingSoonLabel.Font = Enum.Font.Gotham
+ComingSoonLabel.TextWrapped = true
+ComingSoonLabel.Parent = AntiCommandsContent
+
+local ComingSoonCorner = Instance.new("UICorner")
+ComingSoonCorner.CornerRadius = UDim.new(0, 6)
+ComingSoonCorner.Parent = ComingSoonLabel
+
+-- FIM DA PARTE 1
+-- Continue para a Parte 2 para ver o resto do código
+
+-- Xith Hub | Free Admin - PARTE 2
+-- Continuação do script (Lógica e Funcionalidades)
+
+-- Player Selector ScreenGui
+local PlayerSelectorGui = Instance.new("ScreenGui")
+PlayerSelectorGui.Name = "PlayerSelector"
+PlayerSelectorGui.ResetOnSpawn = false
+PlayerSelectorGui.Enabled = false
+PlayerSelectorGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local PlayerSelectorFrame = Instance.new("Frame")
+PlayerSelectorFrame.Size = UDim2.new(0, 200, 0, 250)
+PlayerSelectorFrame.Position = UDim2.new(0.5, -100, 0.5, -125)
+PlayerSelectorFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+PlayerSelectorFrame.BorderSizePixel = 0
+PlayerSelectorFrame.Parent = PlayerSelectorGui
+
+local PSCorner = Instance.new("UICorner")
+PSCorner.CornerRadius = UDim.new(0, 8)
+PSCorner.Parent = PlayerSelectorFrame
+
+local PSTopBar = Instance.new("Frame")
+PSTopBar.Size = UDim2.new(1, 0, 0, 30)
+PSTopBar.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+PSTopBar.BorderSizePixel = 0
+PSTopBar.Parent = PlayerSelectorFrame
+
+local PSTopCorner = Instance.new("UICorner")
+PSTopCorner.CornerRadius = UDim.new(0, 8)
+PSTopCorner.Parent = PSTopBar
+
+local PSTopFix = Instance.new("Frame")
+PSTopFix.Size = UDim2.new(1, 0, 0, 8)
+PSTopFix.Position = UDim2.new(0, 0, 1, -8)
+PSTopFix.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+PSTopFix.BorderSizePixel = 0
+PSTopFix.Parent = PSTopBar
+
+local PSTitle = Instance.new("TextLabel")
+PSTitle.Size = UDim2.new(1, -35, 1, 0)
+PSTitle.Position = UDim2.new(0, 10, 0, 0)
+PSTitle.BackgroundTransparency = 1
+PSTitle.Text = "Select Player"
+PSTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+PSTitle.TextSize = 13
+PSTitle.Font = Enum.Font.GothamBold
+PSTitle.TextXAlignment = Enum.TextXAlignment.Left
+PSTitle.Parent = PSTopBar
+
+local PSCloseButton = Instance.new("TextButton")
+PSCloseButton.Size = UDim2.new(0, 25, 0, 25)
+PSCloseButton.Position = UDim2.new(1, -28, 0, 2.5)
+PSCloseButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+PSCloseButton.Text = "X"
+PSCloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+PSCloseButton.TextSize = 13
+PSCloseButton.Font = Enum.Font.GothamBold
+PSCloseButton.Parent = PSTopBar
+
+local PSCloseCorner = Instance.new("UICorner")
+PSCloseCorner.CornerRadius = UDim.new(0, 5)
+PSCloseCorner.Parent = PSCloseButton
+
+local PlayerScrollFrame = Instance.new("ScrollingFrame")
+PlayerScrollFrame.Size = UDim2.new(1, -10, 1, -40)
+PlayerScrollFrame.Position = UDim2.new(0, 5, 0, 35)
+PlayerScrollFrame.BackgroundTransparency = 1
+PlayerScrollFrame.ScrollBarThickness = 4
+PlayerScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+PlayerScrollFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+PlayerScrollFrame.Parent = PlayerSelectorFrame
+
+local PlayerLayout = Instance.new("UIListLayout")
+PlayerLayout.Padding = UDim.new(0, 5)
+PlayerLayout.Parent = PlayerScrollFrame
+
+-- Command Selector ScreenGui
+local CommandSelectorGui = Instance.new("ScreenGui")
+CommandSelectorGui.Name = "CommandSelector"
+CommandSelectorGui.ResetOnSpawn = false
+CommandSelectorGui.Enabled = false
+CommandSelectorGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local CommandSelectorFrame = Instance.new("Frame")
+CommandSelectorFrame.Size = UDim2.new(0, 200, 0, 300)
+CommandSelectorFrame.Position = UDim2.new(0.5, -100, 0.5, -150)
+CommandSelectorFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+CommandSelectorFrame.BorderSizePixel = 0
+CommandSelectorFrame.Parent = CommandSelectorGui
+
+local CSCorner = Instance.new("UICorner")
+CSCorner.CornerRadius = UDim.new(0, 8)
+CSCorner.Parent = CommandSelectorFrame
+
+local CSTopBar = Instance.new("Frame")
+CSTopBar.Size = UDim2.new(1, 0, 0, 30)
+CSTopBar.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+CSTopBar.BorderSizePixel = 0
+CSTopBar.Parent = CommandSelectorFrame
+
+local CSTopCorner = Instance.new("UICorner")
+CSTopCorner.CornerRadius = UDim.new(0, 8)
+CSTopCorner.Parent = CSTopBar
+
+local CSTopFix = Instance.new("Frame")
+CSTopFix.Size = UDim2.new(1, 0, 0, 8)
+CSTopFix.Position = UDim2.new(0, 0, 1, -8)
+CSTopFix.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+CSTopFix.BorderSizePixel = 0
+CSTopFix.Parent = CSTopBar
+
+local CSTitle = Instance.new("TextLabel")
+CSTitle.Size = UDim2.new(1, -35, 1, 0)
+CSTitle.Position = UDim2.new(0, 10, 0, 0)
+CSTitle.BackgroundTransparency = 1
+CSTitle.Text = "Select Command"
+CSTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+CSTitle.TextSize = 13
+CSTitle.Font = Enum.Font.GothamBold
+CSTitle.TextXAlignment = Enum.TextXAlignment.Left
+CSTitle.Parent = CSTopBar
+
+local CSCloseButton = Instance.new("TextButton")
+CSCloseButton.Size = UDim2.new(0, 25, 0, 25)
+CSCloseButton.Position = UDim2.new(1, -28, 0, 2.5)
+CSCloseButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+CSCloseButton.Text = "X"
+CSCloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+CSCloseButton.TextSize = 13
+CSCloseButton.Font = Enum.Font.GothamBold
+CSCloseButton.Parent = CSTopBar
+
+local CSCloseCorner = Instance.new("UICorner")
+CSCloseCorner.CornerRadius = UDim.new(0, 5)
+CSCloseCorner.Parent = CSCloseButton
+
+local CommandScrollFrame = Instance.new("ScrollingFrame")
+CommandScrollFrame.Size = UDim2.new(1, -10, 1, -40)
+CommandScrollFrame.Position = UDim2.new(0, 5, 0, 35)
+CommandScrollFrame.BackgroundTransparency = 1
+CommandScrollFrame.ScrollBarThickness = 4
+CommandScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+CommandScrollFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+CommandScrollFrame.Parent = CommandSelectorFrame
+
+local CommandLayout = Instance.new("UIListLayout")
+CommandLayout.Padding = UDim.new(0, 5)
+CommandLayout.Parent = CommandScrollFrame
+
+-- Botão de Abrir/Fechar (Toggle Button)
+local ToggleButton = Instance.new("TextButton")
+ToggleButton.Name = "ToggleButton"
+ToggleButton.Size = UDim2.new(0, 50, 0, 50)
+ToggleButton.Position = UDim2.new(0, 10, 0, 10)
+ToggleButton.BackgroundColor3 = Color3.fromRGB(50, 150, 255)
+ToggleButton.Text = "X"
+ToggleButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ToggleButton.TextSize = 20
+ToggleButton.Font = Enum.Font.GothamBold
+ToggleButton.Parent = Xith_Hub
+
+local ToggleCorner = Instance.new("UICorner")
+ToggleCorner.CornerRadius = UDim.new(0, 10)
+ToggleCorner.Parent = ToggleButton
+
+-- Variables
+local selectedPlayer = nil
+local selectedCommand = nil
+local onePlayerEnabled = false
+local allPlayersEnabled = false
+local antiCmdbar2Enabled = false
+local chatConnection = nil
+local isMainFrameVisible = true
+
+-- Commands List (45+ comandos)
+local commands = {
+	"freeze", "unfreeze", "explode", "poop", "fling", "bring", 
+	"giant", "small", "void", "fly", "unfly", "jail", "unjail", 
+	"tall", "bighead", "re", "refresh", "respawn", "kill", "punish",
+	"unpunish", "clone", "unclone", "god", "ungod", "ff", "unff",
+	"sparkles", "unsparkles", "smoke", "unsmoke", "fire", "unfire",
+	"invisible", "visible", "speed", "jump", "sit", "trip",
+	"sword", "unsword", "heal", "damage", "kick", "ban",
+	"unban", "mute", "unmute", "blind", "unblind"
+}
+
+-- Funções de Utilidade
+local function makeDraggable(frame, dragArea)
+	local dragging = false
+	local dragInput, dragStart, startPos
+	
+	local function update(input)
+		local delta = input.Position - dragStart
+		frame.Position = UDim2.new(
+			startPos.X.Scale, 
+			startPos.X.Offset + delta.X,
+			startPos.Y.Scale, 
+			startPos.Y.Offset + delta.Y
+		)
+	end
+	
+	dragArea.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+			dragging = true
+			dragStart = input.Position
+			startPos = frame.Position
+			
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragging = false
+				end
+			end)
+		end
+	end)
+	
+	dragArea.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			dragInput = input
+		end
+	end)
+	
+	UserInputService.InputChanged:Connect(function(input)
+		if input == dragInput and dragging then
+			update(input)
+		end
+	end)
+end
+
+-- Função para animar toggle switch
+local function animateToggle(switch, ball, enabled)
+	local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+	
+	if enabled then
+		local bgTween = TweenService:Create(switch, tweenInfo, {BackgroundColor3 = Color3.fromRGB(50, 200, 100)})
+		local ballTween = TweenService:Create(ball, tweenInfo, {Position = UDim2.new(1, -18, 0.5, -8)})
+		bgTween:Play()
+		ballTween:Play()
+	else
+		local bgTween = TweenService:Create(switch, tweenInfo, {BackgroundColor3 = Color3.fromRGB(60, 60, 75)})
+		local ballTween = TweenService:Create(ball, tweenInfo, {Position = UDim2.new(0, 2, 0.5, -8)})
+		bgTween:Play()
+		ballTween:Play()
+	end
+end
+
+-- Função para executar comando
+local function executeCommand(command, playerName)
+	local args = {":"..command.." "..playerName}
+	pcall(function()
+		game:GetService("ReplicatedStorage"):WaitForChild("HDAdminClient"):WaitForChild("Signals"):WaitForChild("RequestCommand"):InvokeServer(unpack(args))
+	end)
+end
+
+-- Função para popular lista de players
+local function populatePlayerList()
+	for _, child in pairs(PlayerScrollFrame:GetChildren()) do
+		if child:IsA("TextButton") then
+			child:Destroy()
+		end
+	end
+	
+	for _, player in pairs(Players:GetPlayers()) do
+		local playerButton = Instance.new("TextButton")
+		playerButton.Size = UDim2.new(1, 0, 0, 30)
+		playerButton.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+		playerButton.Text = player.Name
+		playerButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		playerButton.TextSize = 12
+		playerButton.Font = Enum.Font.Gotham
+		playerButton.Parent = PlayerScrollFrame
+		
+		local btnCorner = Instance.new("UICorner")
+		btnCorner.CornerRadius = UDim.new(0, 6)
+		btnCorner.Parent = playerButton
+		
+		playerButton.MouseButton1Click:Connect(function()
+			selectedPlayer = player.Name
+			SelectPlayerButton.Text = "Player: "..player.Name
+			PlayerSelectorGui.Enabled = false
+		end)
+	end
+end
+
+-- Função para popular lista de comandos
+local function populateCommandList()
+	for _, child in pairs(CommandScrollFrame:GetChildren()) do
+		if child:IsA("TextButton") then
+			child:Destroy()
+		end
+	end
+	
+	for _, cmd in pairs(commands) do
+		local cmdButton = Instance.new("TextButton")
+		cmdButton.Size = UDim2.new(1, 0, 0, 30)
+		cmdButton.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+		cmdButton.Text = cmd
+		cmdButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+		cmdButton.TextSize = 12
+		cmdButton.Font = Enum.Font.Gotham
+		cmdButton.Parent = CommandScrollFrame
+		
+		local btnCorner = Instance.new("UICorner")
+		btnCorner.CornerRadius = UDim.new(0, 6)
+		btnCorner.Parent = cmdButton
+		
+		cmdButton.MouseButton1Click:Connect(function()
+			selectedCommand = cmd
+			SelectCommandButton.Text = "Cmd: "..cmd
+			CommandSelectorGui.Enabled = false
+		end)
+	end
+end
+
+-- Função Anti Cmdbar2
+local function startAntiCmdbar2()
+	if chatConnection then
+		chatConnection:Disconnect()
+	end
+	
+	chatConnection = Players.PlayerAdded:Connect(function(player)
+		player.Chatted:Connect(function(message)
+			local lowerMsg = string.lower(message)
+			if string.find(lowerMsg, ":cmdbar2") or string.find(lowerMsg, ":commandbar2") then
+				task.wait(0.1)
+				executeCommand("uncmdbar2", player.Name)
+			end
+		end)
+	end)
+	
+	for _, player in pairs(Players:GetPlayers()) do
+		player.Chatted:Connect(function(message)
+			local lowerMsg = string.lower(message)
+			if string.find(lowerMsg, ":cmdbar2") or string.find(lowerMsg, ":commandbar2") then
+				task.wait(0.1)
+				executeCommand("uncmdbar2", player.Name)
+			end
+		end)
+	end
+end
+
+local function stopAntiCmdbar2()
+	if chatConnection then
+		chatConnection:Disconnect()
+		chatConnection = nil
+	end
+end
+
+-- Configurar arrastar janelas
+makeDraggable(MainFrame, TopBar)
+makeDraggable(PlayerSelectorFrame, PSTopBar)
+makeDraggable(CommandSelectorFrame, CSTopBar)
+
+-- Eventos dos botões
+CloseButton.MouseButton1Click:Connect(function()
+	local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.In)
+	local tween = TweenService:Create(MainFrame, tweenInfo, {Size = UDim2.new(0, 0, 0, 0)})
+	tween:Play()
+	tween.Completed:Wait()
+	MainFrame.Visible = false
+	isMainFrameVisible = false
+end)
+
+ToggleButton.MouseButton1Click:Connect(function()
+	if isMainFrameVisible then
+		local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.In)
+		local tween = TweenService:Create(MainFrame, tweenInfo, {Size = UDim2.new(0, 0, 0, 0)})
+		tween:Play()
+		tween.Completed:Wait()
+		MainFrame.Visible = false
+		isMainFrameVisible = false
+	else
+		MainFrame.Visible = true
+		MainFrame.Size = UDim2.new(0, 0, 0, 0)
+		local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+		local tween = TweenService:Create(MainFrame, tweenInfo, {Size = UDim2.new(0, 280, 0, 350)})
+		tween:Play()
+		isMainFrameVisible = true
+	end
+end)
+
+-- Eventos das Tabs
+CommandsTab.MouseButton1Click:Connect(function()
+	CommandsContent.Visible = true
+	AntiCommandsContent.Visible = false
+	CommandsTab.BackgroundColor3 = Color3.fromRGB(50, 150, 255)
+	AntiCommandsTab.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
+end)
+
+AntiCommandsTab.MouseButton1Click:Connect(function()
+	CommandsContent.Visible = false
+	AntiCommandsContent.Visible = true
+	CommandsTab.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
+	AntiCommandsTab.BackgroundColor3 = Color3.fromRGB(50, 150, 255)
+end)
+
+-- Eventos Select Player
+SelectPlayerButton.MouseButton1Click:Connect(function()
+	populatePlayerList()
+	PlayerSelectorGui.Enabled = true
+end)
+
+PSCloseButton.MouseButton1Click:Connect(function()
+	PlayerSelectorGui.Enabled = false
+end)
+
+-- Eventos Select Command
+SelectCommandButton.MouseButton1Click:Connect(function()
+	populateCommandList()
+	CommandSelectorGui.Enabled = true
+end)
+
+CSCloseButton.MouseButton1Click:Connect(function()
+	CommandSelectorGui.Enabled = false
+end)
+
+-- Eventos Toggles
+OnePlayerSwitch.MouseButton1Click:Connect(function()
+	onePlayerEnabled = not onePlayerEnabled
+	if onePlayerEnabled then
+		allPlayersEnabled = false
+		animateToggle(AllPlayersSwitch, SwitchBall2, false)
+	end
+	animateToggle(OnePlayerSwitch, SwitchBall1, onePlayerEnabled)
+end)
+
+AllPlayersSwitch.MouseButton1Click:Connect(function()
+	allPlayersEnabled = not allPlayersEnabled
+	if allPlayersEnabled then
+		onePlayerEnabled = false
+		animateToggle(OnePlayerSwitch, SwitchBall1, false)
+	end
+	animateToggle(AllPlayersSwitch, SwitchBall2, allPlayersEnabled)
+end)
+
+-- Evento Execute Command
+ExecuteButton.MouseButton1Click:Connect(function()
+	if not selectedCommand then
+		ExecuteButton.Text = "Select a command first!"
+		wait(2)
+		ExecuteButton.Text = "Execute Command"
+		return
+	end
+	
+	if onePlayerEnabled then
+		if not selectedPlayer then
+			ExecuteButton.Text = "Select a player first!"
+			wait(2)
+			ExecuteButton.Text = "Execute Command"
+			return
+		end
+		executeCommand(selectedCommand, selectedPlayer)
+		ExecuteButton.Text = "Executed!"
+		wait(1)
+		ExecuteButton.Text = "Execute Command"
+	elseif allPlayersEnabled then
+		ExecuteButton.Text = "Executing..."
+		for _, player in pairs(Players:GetPlayers()) do
+			executeCommand(selectedCommand, player.Name)
+			wait(0.5)
+		end
+		ExecuteButton.Text = "All Done!"
+		wait(1)
+		ExecuteButton.Text = "Execute Command"
+	else
+		ExecuteButton.Text = "Enable One or All Players!"
+		wait(2)
+		ExecuteButton.Text = "Execute Command"
+	end
+end)
+
+-- Evento Anti Cmdbar2
+AntiCmdbar2Switch.MouseButton1Click:Connect(function()
+	antiCmdbar2Enabled = not antiCmdbar2Enabled
+	animateToggle(AntiCmdbar2Switch, SwitchBall3, antiCmdbar2Enabled)
+	
+	if antiCmdbar2Enabled then
+		-- Executar :uncmdbar2 em todos os players ao ativar
+		for _, player in pairs(Players:GetPlayers()) do
+			if player ~= LocalPlayer then
+				executeCommand("uncmdbar2", player.Name)
+				wait(0.5)
+			end
+		end
+		startAntiCmdbar2()
+	else
+		stopAntiCmdbar2()
+	end
+end)
+
+-- Parent dos ScreenGuis
+Xith_Hub.Parent = game:GetService("CoreGui")
+PlayerSelectorGui.Parent = game:GetService("CoreGui")
+CommandSelectorGui.Parent = game:GetService("CoreGui")
+
+print("Xith Hub | Free Admin loaded successfully!")
