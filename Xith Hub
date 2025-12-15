@@ -1,4 +1,4 @@
--- Xith Hub | Free Admin - PARTE 1
+-- Xith Hub | Free Admin - PARTE 1 (CORRIGIDA)
 -- Script para Roblox Mobile
 
 local Players = game:GetService("Players")
@@ -283,6 +283,52 @@ local BallCorner2 = Instance.new("UICorner")
 BallCorner2.CornerRadius = UDim.new(1, 0)
 BallCorner2.Parent = SwitchBall2
 
+-- Exclude Me Toggle (NOVO)
+local ExcludeMeToggle = Instance.new("Frame")
+ExcludeMeToggle.Name = "ExcludeMeToggle"
+ExcludeMeToggle.Size = UDim2.new(1, 0, 0, 35)
+ExcludeMeToggle.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+ExcludeMeToggle.Parent = CommandsContent
+
+local ExcludeMeCorner = Instance.new("UICorner")
+ExcludeMeCorner.CornerRadius = UDim.new(0, 6)
+ExcludeMeCorner.Parent = ExcludeMeToggle
+
+local ExcludeMeLabel = Instance.new("TextLabel")
+ExcludeMeLabel.Size = UDim2.new(1, -50, 1, 0)
+ExcludeMeLabel.Position = UDim2.new(0, 10, 0, 0)
+ExcludeMeLabel.BackgroundTransparency = 1
+ExcludeMeLabel.Text = "Exclude Me"
+ExcludeMeLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+ExcludeMeLabel.TextSize = 13
+ExcludeMeLabel.Font = Enum.Font.Gotham
+ExcludeMeLabel.TextXAlignment = Enum.TextXAlignment.Left
+ExcludeMeLabel.Parent = ExcludeMeToggle
+
+local ExcludeMeSwitch = Instance.new("TextButton")
+ExcludeMeSwitch.Name = "Switch"
+ExcludeMeSwitch.Size = UDim2.new(0, 40, 0, 20)
+ExcludeMeSwitch.Position = UDim2.new(1, -45, 0.5, -10)
+ExcludeMeSwitch.BackgroundColor3 = Color3.fromRGB(60, 60, 75)
+ExcludeMeSwitch.Text = ""
+ExcludeMeSwitch.Parent = ExcludeMeToggle
+
+local SwitchCorner4 = Instance.new("UICorner")
+SwitchCorner4.CornerRadius = UDim.new(1, 0)
+SwitchCorner4.Parent = ExcludeMeSwitch
+
+local SwitchBall4 = Instance.new("Frame")
+SwitchBall4.Name = "Ball"
+SwitchBall4.Size = UDim2.new(0, 16, 0, 16)
+SwitchBall4.Position = UDim2.new(0, 2, 0.5, -8)
+SwitchBall4.BackgroundColor3 = Color3.fromRGB(200, 200, 200)
+SwitchBall4.BorderSizePixel = 0
+SwitchBall4.Parent = ExcludeMeSwitch
+
+local BallCorner4 = Instance.new("UICorner")
+BallCorner4.CornerRadius = UDim.new(1, 0)
+BallCorner4.Parent = SwitchBall4
+
 -- Select Command Button
 local SelectCommandButton = Instance.new("TextButton")
 SelectCommandButton.Name = "SelectCommandButton"
@@ -400,7 +446,7 @@ ComingSoonCorner.Parent = ComingSoonLabel
 -- FIM DA PARTE 1
 -- Continue para a Parte 2 para ver o resto do código
 
--- Xith Hub | Free Admin - PARTE 2
+-- Xith Hub | Free Admin - PARTE 2 (CORRIGIDA)
 -- Continuação do script (Lógica e Funcionalidades)
 
 -- Player Selector ScreenGui
@@ -570,8 +616,9 @@ local selectedPlayer = nil
 local selectedCommand = nil
 local onePlayerEnabled = false
 local allPlayersEnabled = false
+local excludeMeEnabled = false -- NOVO
 local antiCmdbar2Enabled = false
-local chatConnection = nil
+local chatConnections = {} -- CORRIGIDO: Agora é uma tabela para armazenar múltiplas conexões
 local isMainFrameVisible = true
 
 -- Commands List (45+ comandos)
@@ -713,38 +760,56 @@ local function populateCommandList()
 	end
 end
 
--- Função Anti Cmdbar2
+-- Função Anti Cmdbar2 (CORRIGIDA)
 local function startAntiCmdbar2()
-	if chatConnection then
-		chatConnection:Disconnect()
-	end
+	-- Limpar conexões antigas
+	stopAntiCmdbar2()
 	
-	chatConnection = Players.PlayerAdded:Connect(function(player)
-		player.Chatted:Connect(function(message)
+	-- Função para monitorar chat de um player
+	local function monitorPlayer(player)
+		if player == LocalPlayer then return end
+		
+		local connection = player.Chatted:Connect(function(message)
+			if not antiCmdbar2Enabled then return end -- Verificação adicional
+			
 			local lowerMsg = string.lower(message)
 			if string.find(lowerMsg, ":cmdbar2") or string.find(lowerMsg, ":commandbar2") then
 				task.wait(0.1)
 				executeCommand("uncmdbar2", player.Name)
 			end
 		end)
+		
+		chatConnections[player.UserId] = connection
+	end
+	
+	-- Monitorar players existentes
+	for _, player in pairs(Players:GetPlayers()) do
+		monitorPlayer(player)
+	end
+	
+	-- Monitorar novos players
+	chatConnections["PlayerAdded"] = Players.PlayerAdded:Connect(function(player)
+		if antiCmdbar2Enabled then
+			monitorPlayer(player)
+		end
 	end)
 	
-	for _, player in pairs(Players:GetPlayers()) do
-		player.Chatted:Connect(function(message)
-			local lowerMsg = string.lower(message)
-			if string.find(lowerMsg, ":cmdbar2") or string.find(lowerMsg, ":commandbar2") then
-				task.wait(0.1)
-				executeCommand("uncmdbar2", player.Name)
-			end
-		end)
-	end
+	-- Limpar conexão quando player sair
+	chatConnections["PlayerRemoving"] = Players.PlayerRemoving:Connect(function(player)
+		if chatConnections[player.UserId] then
+			chatConnections[player.UserId]:Disconnect()
+			chatConnections[player.UserId] = nil
+		end
+	end)
 end
 
 local function stopAntiCmdbar2()
-	if chatConnection then
-		chatConnection:Disconnect()
-		chatConnection = nil
+	for id, connection in pairs(chatConnections) do
+		if typeof(connection) == "RBXScriptConnection" then
+			connection:Disconnect()
+		end
 	end
+	chatConnections = {}
 end
 
 -- Configurar arrastar janelas
@@ -834,7 +899,13 @@ AllPlayersSwitch.MouseButton1Click:Connect(function()
 	animateToggle(AllPlayersSwitch, SwitchBall2, allPlayersEnabled)
 end)
 
--- Evento Execute Command
+-- Evento Exclude Me Toggle (NOVO)
+ExcludeMeSwitch.MouseButton1Click:Connect(function()
+	excludeMeEnabled = not excludeMeEnabled
+	animateToggle(ExcludeMeSwitch, SwitchBall4, excludeMeEnabled)
+end)
+
+-- Evento Execute Command (ATUALIZADO)
 ExecuteButton.MouseButton1Click:Connect(function()
 	if not selectedCommand then
 		ExecuteButton.Text = "Select a command first!"
@@ -850,17 +921,38 @@ ExecuteButton.MouseButton1Click:Connect(function()
 			ExecuteButton.Text = "Execute Command"
 			return
 		end
+		
+		-- Verificar se não é para executar em si mesmo
+		if excludeMeEnabled and selectedPlayer == LocalPlayer.Name then
+			ExecuteButton.Text = "Cannot execute on yourself!"
+			wait(2)
+			ExecuteButton.Text = "Execute Command"
+			return
+		end
+		
 		executeCommand(selectedCommand, selectedPlayer)
 		ExecuteButton.Text = "Executed!"
 		wait(1)
 		ExecuteButton.Text = "Execute Command"
+		
 	elseif allPlayersEnabled then
 		ExecuteButton.Text = "Executing..."
+		local executed = 0
+		
 		for _, player in pairs(Players:GetPlayers()) do
-			executeCommand(selectedCommand, player.Name)
-			wait(0.5)
+			-- Pular o próprio player se Exclude Me estiver ativado
+			if not (excludeMeEnabled and player == LocalPlayer) then
+				executeCommand(selectedCommand, player.Name)
+				executed = executed + 1
+				wait(0.5)
+			end
 		end
-		ExecuteButton.Text = "All Done!"
+		
+		if executed > 0 then
+			ExecuteButton.Text = "All Done! ("..executed..")"
+		else
+			ExecuteButton.Text = "No players affected!"
+		end
 		wait(1)
 		ExecuteButton.Text = "Execute Command"
 	else
@@ -870,7 +962,7 @@ ExecuteButton.MouseButton1Click:Connect(function()
 	end
 end)
 
--- Evento Anti Cmdbar2
+-- Evento Anti Cmdbar2 (CORRIGIDO)
 AntiCmdbar2Switch.MouseButton1Click:Connect(function()
 	antiCmdbar2Enabled = not antiCmdbar2Enabled
 	animateToggle(AntiCmdbar2Switch, SwitchBall3, antiCmdbar2Enabled)
@@ -885,7 +977,7 @@ AntiCmdbar2Switch.MouseButton1Click:Connect(function()
 		end
 		startAntiCmdbar2()
 	else
-		stopAntiCmdbar2()
+		stopAntiCmdbar2() -- Agora para corretamente quando desativado
 	end
 end)
 
@@ -895,3 +987,6 @@ PlayerSelectorGui.Parent = game:GetService("CoreGui")
 CommandSelectorGui.Parent = game:GetService("CoreGui")
 
 print("Xith Hub | Free Admin loaded successfully!")
+print("Features:")
+print("- Fixed Anti Cmdbar2 toggle bug")
+print("- Added Exclude Me toggle to prevent commands on yourself")
