@@ -1,4 +1,5 @@
--- Xith Hub | Free Admin - PARTE 1 (CORRIGIDA)
+
+-- Xith Hub | Free Admin - PARTE 1 (NOVA VERSÃO)
 -- Script para Roblox Mobile
 
 local Players = game:GetService("Players")
@@ -125,6 +126,21 @@ local CmdTabCorner = Instance.new("UICorner")
 CmdTabCorner.CornerRadius = UDim.new(0, 6)
 CmdTabCorner.Parent = CommandsTab
 
+-- Troll Tab Button (NOVO)
+local TrollTab = Instance.new("TextButton")
+TrollTab.Name = "TrollTab"
+TrollTab.Size = UDim2.new(0, 70, 1, -10)
+TrollTab.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
+TrollTab.Text = "Troll"
+TrollTab.TextColor3 = Color3.fromRGB(255, 255, 255)
+TrollTab.TextSize = 13
+TrollTab.Font = Enum.Font.GothamBold
+TrollTab.Parent = TabsContainer
+
+local TrollTabCorner = Instance.new("UICorner")
+TrollTabCorner.CornerRadius = UDim.new(0, 6)
+TrollTabCorner.Parent = TrollTab
+
 -- Anti Commands Tab Button
 local AntiCommandsTab = Instance.new("TextButton")
 AntiCommandsTab.Name = "AntiCommandsTab"
@@ -190,6 +206,21 @@ SelectPlayerButton.Parent = CommandsContent
 local SelPlayerCorner = Instance.new("UICorner")
 SelPlayerCorner.CornerRadius = UDim.new(0, 6)
 SelPlayerCorner.Parent = SelectPlayerButton
+
+-- Blacklist Button (NOVO)
+local BlacklistButton = Instance.new("TextButton")
+BlacklistButton.Name = "BlacklistButton"
+BlacklistButton.Size = UDim2.new(1, 0, 0, 35)
+BlacklistButton.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+BlacklistButton.Text = "Blacklist Players"
+BlacklistButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+BlacklistButton.TextSize = 13
+BlacklistButton.Font = Enum.Font.GothamBold
+BlacklistButton.Parent = CommandsContent
+
+local BlacklistCorner = Instance.new("UICorner")
+BlacklistCorner.CornerRadius = UDim.new(0, 6)
+BlacklistCorner.Parent = BlacklistButton
 
 -- One Player Toggle
 local OnePlayerToggle = Instance.new("Frame")
@@ -283,7 +314,7 @@ local BallCorner2 = Instance.new("UICorner")
 BallCorner2.CornerRadius = UDim.new(1, 0)
 BallCorner2.Parent = SwitchBall2
 
--- Exclude Me Toggle (NOVO)
+-- Exclude Me Toggle
 local ExcludeMeToggle = Instance.new("Frame")
 ExcludeMeToggle.Name = "ExcludeMeToggle"
 ExcludeMeToggle.Size = UDim2.new(1, 0, 0, 35)
@@ -359,6 +390,59 @@ local ExecCorner = Instance.new("UICorner")
 ExecCorner.CornerRadius = UDim.new(0, 6)
 ExecCorner.Parent = ExecuteButton
 
+-- Troll Content (NOVO)
+local TrollContent = Instance.new("ScrollingFrame")
+TrollContent.Name = "TrollContent"
+TrollContent.Size = UDim2.new(1, 0, 1, 0)
+TrollContent.BackgroundTransparency = 1
+TrollContent.BorderSizePixel = 0
+TrollContent.ScrollBarThickness = 4
+TrollContent.CanvasSize = UDim2.new(0, 0, 0, 0)
+TrollContent.AutomaticCanvasSize = Enum.AutomaticSize.Y
+TrollContent.Visible = false
+TrollContent.Parent = ContentFrame
+
+local TrollLayout = Instance.new("UIListLayout")
+TrollLayout.Padding = UDim.new(0, 8)
+TrollLayout.Parent = TrollContent
+
+local TrollPadding = Instance.new("UIPadding")
+TrollPadding.PaddingLeft = UDim.new(0, 8)
+TrollPadding.PaddingRight = UDim.new(0, 8)
+TrollPadding.PaddingTop = UDim.new(0, 8)
+TrollPadding.PaddingBottom = UDim.new(0, 8)
+TrollPadding.Parent = TrollContent
+
+-- Message Button (NOVO)
+local MessageButton = Instance.new("TextButton")
+MessageButton.Name = "MessageButton"
+MessageButton.Size = UDim2.new(1, 0, 0, 40)
+MessageButton.BackgroundColor3 = Color3.fromRGB(255, 150, 50)
+MessageButton.Text = "Send Message (:m)"
+MessageButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+MessageButton.TextSize = 14
+MessageButton.Font = Enum.Font.GothamBold
+MessageButton.Parent = TrollContent
+
+local MsgCorner = Instance.new("UICorner")
+MsgCorner.CornerRadius = UDim.new(0, 6)
+MsgCorner.Parent = MessageButton
+
+-- Coming Soon Troll
+local ComingSoonTroll = Instance.new("TextLabel")
+ComingSoonTroll.Size = UDim2.new(1, 0, 0, 80)
+ComingSoonTroll.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+ComingSoonTroll.Text = "More Troll Features Coming Soon!\n\nStay tuned for:\n• Spam Commands\n• Prank Sounds\n• Visual Trolls"
+ComingSoonTroll.TextColor3 = Color3.fromRGB(180, 180, 180)
+ComingSoonTroll.TextSize = 12
+ComingSoonTroll.Font = Enum.Font.Gotham
+ComingSoonTroll.TextWrapped = true
+ComingSoonTroll.Parent = TrollContent
+
+local ComingSoonTrollCorner = Instance.new("UICorner")
+ComingSoonTrollCorner.CornerRadius = UDim.new(0, 6)
+ComingSoonTrollCorner.Parent = ComingSoonTroll
+
 -- Anti Commands Content
 local AntiCommandsContent = Instance.new("ScrollingFrame")
 AntiCommandsContent.Name = "AntiCommandsContent"
@@ -428,7 +512,7 @@ local BallCorner3 = Instance.new("UICorner")
 BallCorner3.CornerRadius = UDim.new(1, 0)
 BallCorner3.Parent = SwitchBall3
 
--- Coming Soon Description
+-- Coming Soon Anti Description
 local ComingSoonLabel = Instance.new("TextLabel")
 ComingSoonLabel.Size = UDim2.new(1, 0, 0, 60)
 ComingSoonLabel.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
@@ -443,11 +527,11 @@ local ComingSoonCorner = Instance.new("UICorner")
 ComingSoonCorner.CornerRadius = UDim.new(0, 6)
 ComingSoonCorner.Parent = ComingSoonLabel
 
--- FIM DA PARTE 1
--- Continue para a Parte 2 para ver o resto do código
+-- FIM DA PARTE 1 (UI)
+print("Xith Hub - Parte 1 (UI) carregada!")
 
--- Xith Hub | Free Admin - PARTE 2 (CORRIGIDA)
--- Continuação do script (Lógica e Funcionalidades)
+-- Xith Hub | Free Admin - PARTE 2 (LÓGICA E FUNCIONALIDADES)
+-- Continuação do script - Cole após a Parte 1
 
 -- Player Selector ScreenGui
 local PlayerSelectorGui = Instance.new("ScreenGui")
@@ -595,7 +679,124 @@ local CommandLayout = Instance.new("UIListLayout")
 CommandLayout.Padding = UDim.new(0, 5)
 CommandLayout.Parent = CommandScrollFrame
 
--- Botão de Abrir/Fechar (Toggle Button)
+-- Blacklist ScreenGui (NOVO)
+local BlacklistGui = Instance.new("ScreenGui")
+BlacklistGui.Name = "BlacklistSelector"
+BlacklistGui.ResetOnSpawn = false
+BlacklistGui.Enabled = false
+BlacklistGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+local BlacklistFrame = Instance.new("Frame")
+BlacklistFrame.Size = UDim2.new(0, 220, 0, 300)
+BlacklistFrame.Position = UDim2.new(0.5, -110, 0.5, -150)
+BlacklistFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+BlacklistFrame.BorderSizePixel = 0
+BlacklistFrame.Parent = BlacklistGui
+
+local BLCorner = Instance.new("UICorner")
+BLCorner.CornerRadius = UDim.new(0, 8)
+BLCorner.Parent = BlacklistFrame
+
+local BLTopBar = Instance.new("Frame")
+BLTopBar.Size = UDim2.new(1, 0, 0, 30)
+BLTopBar.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+BLTopBar.BorderSizePixel = 0
+BLTopBar.Parent = BlacklistFrame
+
+local BLTopCorner = Instance.new("UICorner")
+BLTopCorner.CornerRadius = UDim.new(0, 8)
+BLTopCorner.Parent = BLTopBar
+
+local BLTopFix = Instance.new("Frame")
+BLTopFix.Size = UDim2.new(1, 0, 0, 8)
+BLTopFix.Position = UDim2.new(0, 0, 1, -8)
+BLTopFix.BackgroundColor3 = Color3.fromRGB(40, 40, 55)
+BLTopFix.BorderSizePixel = 0
+BLTopFix.Parent = BLTopBar
+
+local BLTitle = Instance.new("TextLabel")
+BLTitle.Size = UDim2.new(1, -35, 1, 0)
+BLTitle.Position = UDim2.new(0, 10, 0, 0)
+BLTitle.BackgroundTransparency = 1
+BLTitle.Text = "Blacklist Players"
+BLTitle.TextColor3 = Color3.fromRGB(255, 255, 255)
+BLTitle.TextSize = 13
+BLTitle.Font = Enum.Font.GothamBold
+BLTitle.TextXAlignment = Enum.TextXAlignment.Left
+BLTitle.Parent = BLTopBar
+
+local BLCloseButton = Instance.new("TextButton")
+BLCloseButton.Size = UDim2.new(0, 25, 0, 25)
+BLCloseButton.Position = UDim2.new(1, -28, 0, 2.5)
+BLCloseButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+BLCloseButton.Text = "X"
+BLCloseButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+BLCloseButton.TextSize = 13
+BLCloseButton.Font = Enum.Font.GothamBold
+BLCloseButton.Parent = BLTopBar
+
+local BLCloseCorner = Instance.new("UICorner")
+BLCloseCorner.CornerRadius = UDim.new(0, 5)
+BLCloseCorner.Parent = BLCloseButton
+
+-- Dropdown Toggle Button
+local DropdownButton = Instance.new("TextButton")
+DropdownButton.Size = UDim2.new(1, -10, 0, 35)
+DropdownButton.Position = UDim2.new(0, 5, 0, 35)
+DropdownButton.BackgroundColor3 = Color3.fromRGB(50, 50, 70)
+DropdownButton.Text = "▼ Select Players to Blacklist"
+DropdownButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+DropdownButton.TextSize = 12
+DropdownButton.Font = Enum.Font.GothamBold
+DropdownButton.Parent = BlacklistFrame
+
+local DropCorner = Instance.new("UICorner")
+DropCorner.CornerRadius = UDim.new(0, 6)
+DropCorner.Parent = DropdownButton
+
+-- Dropdown ScrollFrame
+local BlacklistScrollFrame = Instance.new("ScrollingFrame")
+BlacklistScrollFrame.Size = UDim2.new(1, -10, 1, -115)
+BlacklistScrollFrame.Position = UDim2.new(0, 5, 0, 75)
+BlacklistScrollFrame.BackgroundColor3 = Color3.fromRGB(35, 35, 45)
+BlacklistScrollFrame.BorderSizePixel = 0
+BlacklistScrollFrame.ScrollBarThickness = 4
+BlacklistScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+BlacklistScrollFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+BlacklistScrollFrame.Visible = false
+BlacklistScrollFrame.Parent = BlacklistFrame
+
+local BLScrollCorner = Instance.new("UICorner")
+BLScrollCorner.CornerRadius = UDim.new(0, 6)
+BLScrollCorner.Parent = BlacklistScrollFrame
+
+local BlacklistLayout = Instance.new("UIListLayout")
+BlacklistLayout.Padding = UDim.new(0, 5)
+BlacklistLayout.Parent = BlacklistScrollFrame
+
+local BLScrollPadding = Instance.new("UIPadding")
+BLScrollPadding.PaddingLeft = UDim.new(0, 5)
+BLScrollPadding.PaddingRight = UDim.new(0, 5)
+BLScrollPadding.PaddingTop = UDim.new(0, 5)
+BLScrollPadding.PaddingBottom = UDim.new(0, 5)
+BLScrollPadding.Parent = BlacklistScrollFrame
+
+-- Clear Blacklist Button
+local ClearBlacklistButton = Instance.new("TextButton")
+ClearBlacklistButton.Size = UDim2.new(1, -10, 0, 30)
+ClearBlacklistButton.Position = UDim2.new(0, 5, 1, -35)
+ClearBlacklistButton.BackgroundColor3 = Color3.fromRGB(255, 100, 100)
+ClearBlacklistButton.Text = "Clear All"
+ClearBlacklistButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+ClearBlacklistButton.TextSize = 12
+ClearBlacklistButton.Font = Enum.Font.GothamBold
+ClearBlacklistButton.Parent = BlacklistFrame
+
+local ClearBLCorner = Instance.new("UICorner")
+ClearBLCorner.CornerRadius = UDim.new(0, 6)
+ClearBLCorner.Parent = ClearBlacklistButton
+
+-- Toggle Button (Abrir/Fechar Hub)
 local ToggleButton = Instance.new("TextButton")
 ToggleButton.Name = "ToggleButton"
 ToggleButton.Size = UDim2.new(0, 50, 0, 50)
@@ -616,10 +817,12 @@ local selectedPlayer = nil
 local selectedCommand = nil
 local onePlayerEnabled = false
 local allPlayersEnabled = false
-local excludeMeEnabled = false -- NOVO
+local excludeMeEnabled = false
 local antiCmdbar2Enabled = false
-local chatConnections = {} -- CORRIGIDO: Agora é uma tabela para armazenar múltiplas conexões
+local chatConnections = {}
 local isMainFrameVisible = true
+local blacklistedPlayers = {}
+local dropdownOpen = false
 
 -- Commands List (45+ comandos)
 local commands = {
@@ -632,6 +835,12 @@ local commands = {
 	"sword", "unsword", "heal", "damage", "kick", "ban",
 	"unban", "mute", "unmute", "blind", "unblind"
 }
+
+-- FIM DA PARTE 2
+print("Xith Hub - Parte 2 (ScreenGuis) carregada!")
+
+-- Xith Hub | Free Admin - PARTE 3 (FUNÇÕES E EVENTOS - FINAL)
+-- Continuação do script - Cole após a Parte 2
 
 -- Funções de Utilidade
 local function makeDraggable(frame, dragArea)
@@ -700,6 +909,11 @@ local function executeCommand(command, playerName)
 	end)
 end
 
+-- Função para verificar se player está na blacklist
+local function isBlacklisted(playerName)
+	return blacklistedPlayers[playerName] == true
+end
+
 -- Função para popular lista de players
 local function populatePlayerList()
 	for _, child in pairs(PlayerScrollFrame:GetChildren()) do
@@ -760,17 +974,81 @@ local function populateCommandList()
 	end
 end
 
--- Função Anti Cmdbar2 (CORRIGIDA)
+-- Função para popular blacklist
+local function populateBlacklistDropdown()
+	for _, child in pairs(BlacklistScrollFrame:GetChildren()) do
+		if child:IsA("Frame") then
+			child:Destroy()
+		end
+	end
+	
+	for _, player in pairs(Players:GetPlayers()) do
+		if player ~= LocalPlayer then
+			local checkboxFrame = Instance.new("Frame")
+			checkboxFrame.Size = UDim2.new(1, 0, 0, 30)
+			checkboxFrame.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
+			checkboxFrame.Parent = BlacklistScrollFrame
+			
+			local checkCorner = Instance.new("UICorner")
+			checkCorner.CornerRadius = UDim.new(0, 6)
+			checkCorner.Parent = checkboxFrame
+			
+			local checkbox = Instance.new("TextButton")
+			checkbox.Size = UDim2.new(0, 20, 0, 20)
+			checkbox.Position = UDim2.new(0, 5, 0.5, -10)
+			checkbox.BackgroundColor3 = Color3.fromRGB(60, 60, 75)
+			checkbox.Text = ""
+			checkbox.Parent = checkboxFrame
+			
+			local checkCorner2 = Instance.new("UICorner")
+			checkCorner2.CornerRadius = UDim.new(0, 4)
+			checkCorner2.Parent = checkbox
+			
+			local checkmark = Instance.new("TextLabel")
+			checkmark.Size = UDim2.new(1, 0, 1, 0)
+			checkmark.BackgroundTransparency = 1
+			checkmark.Text = "✓"
+			checkmark.TextColor3 = Color3.fromRGB(50, 200, 100)
+			checkmark.TextSize = 16
+			checkmark.Font = Enum.Font.GothamBold
+			checkmark.Visible = blacklistedPlayers[player.Name] or false
+			checkmark.Parent = checkbox
+			
+			local playerLabel = Instance.new("TextLabel")
+			playerLabel.Size = UDim2.new(1, -35, 1, 0)
+			playerLabel.Position = UDim2.new(0, 30, 0, 0)
+			playerLabel.BackgroundTransparency = 1
+			playerLabel.Text = player.Name
+			playerLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+			playerLabel.TextSize = 12
+			playerLabel.Font = Enum.Font.Gotham
+			playerLabel.TextXAlignment = Enum.TextXAlignment.Left
+			playerLabel.Parent = checkboxFrame
+			
+			checkbox.MouseButton1Click:Connect(function()
+				if blacklistedPlayers[player.Name] then
+					blacklistedPlayers[player.Name] = nil
+					checkmark.Visible = false
+					checkbox.BackgroundColor3 = Color3.fromRGB(60, 60, 75)
+				else
+					blacklistedPlayers[player.Name] = true
+					checkmark.Visible = true
+					checkbox.BackgroundColor3 = Color3.fromRGB(50, 200, 100)
+				end
+			end)
+		end
+	end
+end
+
+-- Função Anti Cmdbar2
 local function startAntiCmdbar2()
-	-- Limpar conexões antigas
 	stopAntiCmdbar2()
 	
-	-- Função para monitorar chat de um player
 	local function monitorPlayer(player)
 		if player == LocalPlayer then return end
 		
 		local connection = player.Chatted:Connect(function(message)
-			if not antiCmdbar2Enabled then return end -- Verificação adicional
+			if not antiCmdbar2Enabled then return end
 			
 			local lowerMsg = string.lower(message)
 			if string.find(lowerMsg, ":cmdbar2") or string.find(lowerMsg, ":commandbar2") then
@@ -782,19 +1060,16 @@ local function startAntiCmdbar2()
 		chatConnections[player.UserId] = connection
 	end
 	
-	-- Monitorar players existentes
 	for _, player in pairs(Players:GetPlayers()) do
 		monitorPlayer(player)
 	end
 	
-	-- Monitorar novos players
 	chatConnections["PlayerAdded"] = Players.PlayerAdded:Connect(function(player)
 		if antiCmdbar2Enabled then
 			monitorPlayer(player)
 		end
 	end)
 	
-	-- Limpar conexão quando player sair
 	chatConnections["PlayerRemoving"] = Players.PlayerRemoving:Connect(function(player)
 		if chatConnections[player.UserId] then
 			chatConnections[player.UserId]:Disconnect()
@@ -816,8 +1091,12 @@ end
 makeDraggable(MainFrame, TopBar)
 makeDraggable(PlayerSelectorFrame, PSTopBar)
 makeDraggable(CommandSelectorFrame, CSTopBar)
+makeDraggable(BlacklistFrame, BLTopBar)
 
--- Eventos dos botões
+-- ============================================
+-- EVENTOS DOS BOTÕES PRINCIPAIS
+-- ============================================
+
 CloseButton.MouseButton1Click:Connect(function()
 	local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.In)
 	local tween = TweenService:Create(MainFrame, tweenInfo, {Size = UDim2.new(0, 0, 0, 0)})
@@ -845,22 +1124,41 @@ ToggleButton.MouseButton1Click:Connect(function()
 	end
 end)
 
--- Eventos das Tabs
+-- ============================================
+-- EVENTOS DAS TABS
+-- ============================================
+
 CommandsTab.MouseButton1Click:Connect(function()
 	CommandsContent.Visible = true
+	TrollContent.Visible = false
 	AntiCommandsContent.Visible = false
 	CommandsTab.BackgroundColor3 = Color3.fromRGB(50, 150, 255)
+	TrollTab.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
+	AntiCommandsTab.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
+end)
+
+TrollTab.MouseButton1Click:Connect(function()
+	CommandsContent.Visible = false
+	TrollContent.Visible = true
+	AntiCommandsContent.Visible = false
+	CommandsTab.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
+	TrollTab.BackgroundColor3 = Color3.fromRGB(50, 150, 255)
 	AntiCommandsTab.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
 end)
 
 AntiCommandsTab.MouseButton1Click:Connect(function()
 	CommandsContent.Visible = false
+	TrollContent.Visible = false
 	AntiCommandsContent.Visible = true
 	CommandsTab.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
+	TrollTab.BackgroundColor3 = Color3.fromRGB(45, 45, 60)
 	AntiCommandsTab.BackgroundColor3 = Color3.fromRGB(50, 150, 255)
 end)
 
--- Eventos Select Player
+-- ============================================
+-- EVENTOS SELECT PLAYER
+-- ============================================
+
 SelectPlayerButton.MouseButton1Click:Connect(function()
 	populatePlayerList()
 	PlayerSelectorGui.Enabled = true
@@ -870,7 +1168,10 @@ PSCloseButton.MouseButton1Click:Connect(function()
 	PlayerSelectorGui.Enabled = false
 end)
 
--- Eventos Select Command
+-- ============================================
+-- EVENTOS SELECT COMMAND
+-- ============================================
+
 SelectCommandButton.MouseButton1Click:Connect(function()
 	populateCommandList()
 	CommandSelectorGui.Enabled = true
@@ -880,7 +1181,46 @@ CSCloseButton.MouseButton1Click:Connect(function()
 	CommandSelectorGui.Enabled = false
 end)
 
--- Eventos Toggles
+-- ============================================
+-- EVENTOS BLACKLIST
+-- ============================================
+
+BlacklistButton.MouseButton1Click:Connect(function()
+	populateBlacklistDropdown()
+	BlacklistGui.Enabled = true
+end)
+
+BLCloseButton.MouseButton1Click:Connect(function()
+	BlacklistGui.Enabled = false
+	dropdownOpen = false
+	BlacklistScrollFrame.Visible = false
+	DropdownButton.Text = "▼ Select Players to Blacklist"
+end)
+
+DropdownButton.MouseButton1Click:Connect(function()
+	dropdownOpen = not dropdownOpen
+	BlacklistScrollFrame.Visible = dropdownOpen
+	
+	if dropdownOpen then
+		DropdownButton.Text = "▲ Select Players to Blacklist"
+		populateBlacklistDropdown()
+	else
+		DropdownButton.Text = "▼ Select Players to Blacklist"
+	end
+end)
+
+ClearBlacklistButton.MouseButton1Click:Connect(function()
+	blacklistedPlayers = {}
+	populateBlacklistDropdown()
+	ClearBlacklistButton.Text = "Cleared!"
+	wait(1)
+	ClearBlacklistButton.Text = "Clear All"
+end)
+
+-- ============================================
+-- EVENTOS TOGGLES
+-- ============================================
+
 OnePlayerSwitch.MouseButton1Click:Connect(function()
 	onePlayerEnabled = not onePlayerEnabled
 	if onePlayerEnabled then
@@ -899,13 +1239,15 @@ AllPlayersSwitch.MouseButton1Click:Connect(function()
 	animateToggle(AllPlayersSwitch, SwitchBall2, allPlayersEnabled)
 end)
 
--- Evento Exclude Me Toggle (NOVO)
 ExcludeMeSwitch.MouseButton1Click:Connect(function()
 	excludeMeEnabled = not excludeMeEnabled
 	animateToggle(ExcludeMeSwitch, SwitchBall4, excludeMeEnabled)
 end)
 
--- Evento Execute Command (ATUALIZADO)
+-- ============================================
+-- EVENTO EXECUTE COMMAND (ATUALIZADO COM BLACKLIST)
+-- ============================================
+
 ExecuteButton.MouseButton1Click:Connect(function()
 	if not selectedCommand then
 		ExecuteButton.Text = "Select a command first!"
@@ -922,9 +1264,17 @@ ExecuteButton.MouseButton1Click:Connect(function()
 			return
 		end
 		
-		-- Verificar se não é para executar em si mesmo
+		-- Verificar Exclude Me
 		if excludeMeEnabled and selectedPlayer == LocalPlayer.Name then
 			ExecuteButton.Text = "Cannot execute on yourself!"
+			wait(2)
+			ExecuteButton.Text = "Execute Command"
+			return
+		end
+		
+		-- Verificar Blacklist
+		if isBlacklisted(selectedPlayer) then
+			ExecuteButton.Text = "Player is blacklisted!"
 			wait(2)
 			ExecuteButton.Text = "Execute Command"
 			return
@@ -941,7 +1291,18 @@ ExecuteButton.MouseButton1Click:Connect(function()
 		
 		for _, player in pairs(Players:GetPlayers()) do
 			-- Pular o próprio player se Exclude Me estiver ativado
-			if not (excludeMeEnabled and player == LocalPlayer) then
+			local shouldSkip = false
+			
+			if excludeMeEnabled and player == LocalPlayer then
+				shouldSkip = true
+			end
+			
+			-- Pular se estiver na blacklist
+			if isBlacklisted(player.Name) then
+				shouldSkip = true
+			end
+			
+			if not shouldSkip then
 				executeCommand(selectedCommand, player.Name)
 				executed = executed + 1
 				wait(0.5)
@@ -962,7 +1323,10 @@ ExecuteButton.MouseButton1Click:Connect(function()
 	end
 end)
 
--- Evento Anti Cmdbar2 (CORRIGIDO)
+-- ============================================
+-- EVENTO ANTI CMDBAR2
+-- ============================================
+
 AntiCmdbar2Switch.MouseButton1Click:Connect(function()
 	antiCmdbar2Enabled = not antiCmdbar2Enabled
 	animateToggle(AntiCmdbar2Switch, SwitchBall3, antiCmdbar2Enabled)
@@ -977,16 +1341,58 @@ AntiCmdbar2Switch.MouseButton1Click:Connect(function()
 		end
 		startAntiCmdbar2()
 	else
-		stopAntiCmdbar2() -- Agora para corretamente quando desativado
+		stopAntiCmdbar2()
 	end
 end)
 
--- Parent dos ScreenGuis
+-- ============================================
+-- EVENTO MESSAGE BUTTON (NOVO)
+-- ============================================
+
+MessageButton.MouseButton1Click:Connect(function()
+	local args = {":m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m :m"}
+	pcall(function()
+		game:GetService("ReplicatedStorage"):WaitForChild("HDAdminClient"):WaitForChild("Signals"):WaitForChild("RequestCommand"):InvokeServer(unpack(args))
+	end)
+	
+	MessageButton.Text = "Message Sent!"
+	wait(1.5)
+	MessageButton.Text = "Send Message (:m)"
+end)
+
+-- ============================================
+-- PARENT DOS SCREENGUIS
+-- ============================================
+
 Xith_Hub.Parent = game:GetService("CoreGui")
 PlayerSelectorGui.Parent = game:GetService("CoreGui")
 CommandSelectorGui.Parent = game:GetService("CoreGui")
+BlacklistGui.Parent = game:GetService("CoreGui")
 
-print("Xith Hub | Free Admin loaded successfully!")
-print("Features:")
-print("- Fixed Anti Cmdbar2 toggle bug")
-print("- Added Exclude Me toggle to prevent commands on yourself")
+-- ============================================
+-- MENSAGEM FINAL
+-- ============================================
+
+print("===========================================")
+print("Xith Hub | Free Admin LOADED SUCCESSFULLY!")
+print("===========================================")
+print("")
+print("✅ NEW FEATURES:")
+print("  • Blacklist System with Dropdown")
+print("  • Troll Tab with Message Button")
+print("  • Fixed Anti Cmdbar2")
+print("  • Exclude Me Toggle")
+print("")
+print("📋 FEATURES:")
+print("  • 45+ Commands Available")
+print("  • One Player Mode")
+print("  • All Players Mode")
+print("  • Blacklist Players")
+print("  • Anti Cmdbar2 Protection")
+print("  • Draggable Interface")
+print("")
+print("===========================================")
+print("Enjoy! 🎮")
+print("===========================================")
+
+-- FIM DO SCRIPT COMPLETO
